@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      #Game Port - This is the main port the game will send connections over | /UDP 
+      - 7777:7777/udp 
+      #Web Admin -This port is used to connect to your servers web admin page (if turned on) | TCP
+      - 8080:8080/tcp
+      #Steam Port | UDP
+      - 20560:20560/udp
+      #Query Port - This port is used to communicate with the Steam Master Server | UDP
+      - 27015:27015/udp
+      #NTP Port - Weekly Outbreak Only - Internet time lookup to determine correct Outbreak | UDP
+      - 123:123/udp

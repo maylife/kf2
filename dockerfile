@@ -11,13 +11,13 @@ FROM cm2network/steamcmd
 # setup folder
 USER root
 RUN mkdir /kf2 ; chown steam /kf2
-USER steam
+#USER steam
 
 # Install KF Server
 RUN ./steamcmd.sh +login anonymous +force_install_dir /kf2 +app_update 232130 +quit
 
 WORKDIR /kf2
-
+RUN chown -R root /kf2
 
 # todo make files stable in git 
 #RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt

@@ -1,5 +1,6 @@
 services:
   web:
+    user: "steam:steam"
     build: .
     ports:
       #Game Port - This is the main port the game will send connections over | /UDP 

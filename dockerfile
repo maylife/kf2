@@ -38,7 +38,7 @@ RUN rm -d -r workshop_download
 # todo make files stable in git 
 #RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt
 RUN sed -i -e 's/bEnabled=false/bEnabled=true/g' KFGame/Config/DefaultWeb.ini
-#RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
+RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
 
 
 COPY --chown=steam:steam ./Config/Web/ServerAdmin/current_player_row.inc ./KFGame/Web/ServerAdmin/current_player_row.inc

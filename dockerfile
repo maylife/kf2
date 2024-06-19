@@ -17,23 +17,19 @@ USER steam
 # Install KF Server
 RUN $steamcmd +login anonymous +force_install_dir $path +app_update 232130 +quit
 
-# Install workshop Items
-RUN mkdir workshop_download
-# workshop - UnofficialKFPatch.UKFPMutator - https://steamcommunity.com/sharedfiles/filedetails/?id=2875147606
-RUN $steamcmd +login anonymous +force_install_dir $path/workshop_download +workshop_download_item 232090 2875147606 +quit
-RUN cp -r ./workshop_download/steamapps/workshop/content/232090/2875147606/* ./KFGame/BrewedPC
-# workshop - FriendlyHUD.FriendlyHUDMutator - https://steamcommunity.com/sharedfiles/filedetails/?id=1819268190
-RUN $steamcmd +login anonymous +force_install_dir $path/workshop_download +workshop_download_item 232090 1819268190 +quit
-RUN cp -r ./workshop_download/steamapps/workshop/content/232090/1819268190/* ./KFGame/BrewedPC
+# Install and setup workshop Items
+COPY --chown=steam:steam ./Config/LinuxServer-KFEngine.ini ./KFGame/Config/LinuxServer-KFEngine.ini
+COPY --chown=+x ./workshop_download.sh ./workshop_download.sh 
+RUN ./workshop_download.sh
 
-RUN rm -d -r workshop_download
-
-
-
+COPY --chown=steam:steam ./Config/KFUnofficialPatch.ini ./KFGame/Config/KFUnofficialPatch.ini
+COPY --chown=steam:steam ./Config/KFxMapVote.ini ./KFGame/Config/KFxMapVote.ini
+COPY --chown=steam:steam ./Config/KFYAS.ini ./KFGame/Config/KFYAS.ini
+COPY --chown=steam:steam ./Config/KFAAL.ini ./KFGame/Config/KFAAL.ini
+COPY --chown=steam:steam ./Config/KFCVC.ini ./KFGame/Config/KFCVC.ini
+COPY --chown=steam:steam ./Config/KFLTI.ini ./KFGame/Config/KFLTI.ini
 
 
-
-#RUN chown -R root $path
 
 # todo make files stable in git 
 #RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt
@@ -54,8 +50,7 @@ RUN timeout 30 ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab ; exi
 COPY --chown=steam:steam ./Config/LinuxServer-KFEngine.ini ./KFGame/Config/LinuxServer-KFEngine.ini
 
 # Start Server
-ENTRYPOINT ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator,FriendlyHUD.FriendlyHUDMutator
-
+ENTRYPOINT ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator
 
 
 # Notes Start

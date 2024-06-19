@@ -36,18 +36,7 @@ COPY --chown=steam:steam ./Config/KFLTI.ini ./KFGame/Config/KFLTI.ini
 RUN sed -i -e 's/bEnabled=false/bEnabled=true/g' KFGame/Config/DefaultWeb.ini
 RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
 
-
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/current_player_row.inc ./KFGame/Web/ServerAdmin/current_player_row.inc
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/current_players_row.inc ./KFGame/Web/ServerAdmin/current_players_row.inc
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/current_players.html ./KFGame/Web/ServerAdmin/current_players.html
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/current_rules.inc ./KFGame/Web/ServerAdmin/current_rules.inc
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/current.html ./KFGame/Web/ServerAdmin/current.html
-COPY --chown=steam:steam ./Config/Web/ServerAdmin/gamesummary.inc ./KFGame/Web/ServerAdmin/gamesummary.inc
-COPY --chown=steam:steam ./Config/Web/images/kf2.css.gz ./KFGame/Web/images/kf2.css.gz
-
-# Hotfix to build Config .ini files
-RUN timeout 30 ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab ; exit 0
-COPY --chown=steam:steam ./Config/LinuxServer-KFEngine.ini ./KFGame/Config/LinuxServer-KFEngine.ini
+COPY --chown=steam:steam ./Config/Web/ ./KFGame/Web/
 
 # Start Server
 ENTRYPOINT ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator

@@ -14,8 +14,10 @@ RUN mkdir $path ; chown steam $path
 WORKDIR $path
 USER steam
 
-# Install KF Server
+# Install KF2 server and generate ini files
 RUN $steamcmd +login anonymous +force_install_dir $path +app_update 232130 +quit
+RUN ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab & sleep 5 ; exit 0
+RUN sed -i -e 's~^bEnabled=.*~bEnabled=true~g' KFGame/Config/KFWeb.ini
 
 # Install and setup workshop Items
 COPY --chown=steam:steam ./Config/LinuxServer-KFEngine.ini ./KFGame/Config/LinuxServer-KFEngine.ini
@@ -33,7 +35,6 @@ COPY --chown=steam:steam ./Config/KFLTI.ini ./KFGame/Config/KFLTI.ini
 
 # todo make files stable in git 
 #RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt
-RUN sed -i -e 's/bEnabled=false/bEnabled=true/g' KFGame/Config/DefaultWeb.ini
 RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
 
 COPY --chown=steam:steam ./Config/Web/ ./KFGame/Web/

@@ -1,7 +1,17 @@
 services:
-  web:
+  kf2:
+  
     user: "steam:steam"
     build: .
+    environment:
+      - SERVER_NAME="(Maylife Server)"
+      - SHORT_NAME="Mays"
+      - WEBSITE_LINK="https://github.com/maylife/kf2"
+      - BANNER_LINK="http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png"
+      - SERVER_MOTD="Welcome /n Welcome /n Welcome"
+      - CLAN_MOTTO="Testing"
+      - ADMIN_PASSWORD=456
+      - GAME_PASSWORD=
     ports:
       #Game Port - This is the main port the game will send connections over | UDP 
       - 7777:7777/udp 

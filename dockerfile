@@ -27,13 +27,19 @@ RUN ./workshop_download.sh
 # Copy Config folder
 COPY --chown=steam:steam ./Config/ ./KFGame/Config/
 
-
-# todo make files stable in git 
-#RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt
-RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
+# Setup KFGame.ini
+ENV SERVER_NAME="Killing Floor 2 Server"
+ENV SHORT_NAME="KFServer"
+ENV WEBSITE_LINK="http://killingfloor2.com/"
+ENV BANNER_LINK="http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png"
+ENV SERVER_MOTD="Welcome to our server. \n \n Have fun and good luck!"
+ENV CLAN_MOTTO="This is the clan motto."
+ENV ADMIN_PASSWORD=
+ENV GAME_PASSWORD=
+COPY --chown=+x ./setup-kfgame.sh ./setup-kfgame.sh
 
 # Start Server
-ENTRYPOINT ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator
+ENTRYPOINT ./setup-kfgame.sh ; ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator
 
 
 # Notes Start

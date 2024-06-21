@@ -24,20 +24,13 @@ COPY --chown=steam:steam ./Config/LinuxServer-KFEngine.ini ./KFGame/Config/Linux
 COPY --chown=+x ./workshop_download.sh ./workshop_download.sh 
 RUN ./workshop_download.sh
 
-COPY --chown=steam:steam ./Config/KFUnofficialPatch.ini ./KFGame/Config/KFUnofficialPatch.ini
-COPY --chown=steam:steam ./Config/KFxMapVote.ini ./KFGame/Config/KFxMapVote.ini
-COPY --chown=steam:steam ./Config/KFYAS.ini ./KFGame/Config/KFYAS.ini
-COPY --chown=steam:steam ./Config/KFAAL.ini ./KFGame/Config/KFAAL.ini
-COPY --chown=steam:steam ./Config/KFCVC.ini ./KFGame/Config/KFCVC.ini
-COPY --chown=steam:steam ./Config/KFLTI.ini ./KFGame/Config/KFLTI.ini
-
+# Copy Config folder
+COPY --chown=steam:steam ./Config/ ./KFGame/Config/
 
 
 # todo make files stable in git 
 #RUN sed -i -e 's/*TARGET*/*Change*/g' hello.txt
 RUN sed -i -e 's/AdminPassword=/AdminPassword=123/g' KFGame/Config/DefaultGame.ini
-
-COPY --chown=steam:steam ./Config/Web/ ./KFGame/Web/
 
 # Start Server
 ENTRYPOINT ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator

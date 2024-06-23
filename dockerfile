@@ -30,7 +30,7 @@ ENV GAME_PASSWORD=
 COPY --chown=+x ./setup-kfgame.sh ./setup-kfgame.sh
 
 # Start Server
-ENTRYPOINT ./setup-kfgame.sh ; ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?Mutator=UnofficialKFPatch.UKFPMutator
+ENTRYPOINT ./setup-kfgame.sh ; ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?Difficulty=1?UnsuppressLogs=1?Mutator=UnofficialKFPatch.UKFPMutator
 
 
 # Notes Start

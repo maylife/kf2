@@ -1,25 +1,22 @@
 FROM cm2network/steamcmd
 
-ARG path=/kf2
+ARG WORKDIR=/home/steam/kf2
 ARG steamcmd=/home/steam/steamcmd/steamcmd.sh
 # setup folder
-USER root
-RUN mkdir $path ; chown steam $path
-WORKDIR $path
+WORKDIR $WORKDIR
 USER steam
 
 # Install KF2 server and generate ini files
-RUN $steamcmd +login anonymous +force_install_dir $path +app_update 232130 +quit
+RUN $steamcmd +login anonymous +force_install_dir $WORKDIR +app_update 232130 +quit
 RUN ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab & sleep 5 ; exit 0
-RUN sed -i -e 's~^bEnabled=.*~bEnabled=true~g' ./KFGame/Config/KFWeb.ini
+RUN sed -i -e 's~^bEnabled=.*~bEnabled=True~g' ./KFGame/Config/KFWeb.ini
 
 # Install and setup workshop Items
 COPY --chown=+x ./workshop_download.sh ./workshop_download.sh 
 RUN ./workshop_download.sh
 
-# Copy Config folder
-COPY --chown=steam:steam ./KFGame/Config/ ./KFGame/Config/
-COPY --chown=steam:steam ./KFGame/Web/ ./KFGame/Web/
+# Copy changes KFGame folder
+COPY --chown=steam:steam ./KFGame/ ./KFGame/
 
 # Setup KFGame.ini
 ENV SERVER_NAME="Killing Floor 2 Server"

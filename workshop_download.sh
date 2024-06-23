@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="$path"
+WORKDIR="$WORKDIR"
 steamcmd="$steamcmd"
 # List of workshop IDs to download
 workshop_ids=(
@@ -20,7 +20,7 @@ workshop_ids=(
 # Download the workshop item
 for id in "${workshop_ids[@]}"; do
     # Copy the downloaded files to the appropriate directories
-    $steamcmd +login anonymous +force_install_dir $path/workshop_download +workshop_download_item 232090 $id +quit
+    $steamcmd +login anonymous +force_install_dir $WORKDIR/workshop_download +workshop_download_item 232090 $id +quit
     
     # Copy the files again to the Cache directory
     mkdir -p "./KFGame/Cache/$id/0/BrewedPC"    

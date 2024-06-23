@@ -11,14 +11,14 @@ USER steam
 # Install KF2 server and generate ini files
 RUN $steamcmd +login anonymous +force_install_dir $path +app_update 232130 +quit
 RUN ./Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab & sleep 5 ; exit 0
-RUN sed -i -e 's~^bEnabled=.*~bEnabled=true~g' KFGame/Config/KFWeb.ini
+RUN sed -i -e 's~^bEnabled=.*~bEnabled=true~g' ./KFGame/Config/KFWeb.ini
 
 # Install and setup workshop Items
 COPY --chown=+x ./workshop_download.sh ./workshop_download.sh 
 RUN ./workshop_download.sh
 
 # Copy Config folder
-COPY --chown=steam:steam ./Config/ ./KFGame/Config/
+COPY --chown=steam:steam ./KFGame/Config/ ./KFGame/Config/
 
 # Setup KFGame.ini
 ENV SERVER_NAME="Killing Floor 2 Server"

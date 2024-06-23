@@ -19,6 +19,7 @@ RUN ./workshop_download.sh
 
 # Copy Config folder
 COPY --chown=steam:steam ./KFGame/Config/ ./KFGame/Config/
+COPY --chown=steam:steam ./KFGame/Web/ ./KFGame/Web/
 
 # Setup KFGame.ini
 ENV SERVER_NAME="Killing Floor 2 Server"

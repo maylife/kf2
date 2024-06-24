@@ -19,14 +19,16 @@ RUN ./workshop_download.sh
 COPY --chown=steam:steam ./KFGame/ ./KFGame/
 
 # Setup KFGame.ini
-ENV SERVER_NAME="Killing Floor 2 Server"
-ENV SHORT_NAME="KFServer"
-ENV WEBSITE_LINK="http://killingfloor2.com/"
-ENV BANNER_LINK="http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png"
-ENV SERVER_MOTD="Welcome to our server. \n \n Have fun and good luck!"
-ENV CLAN_MOTTO="This is the clan motto."
-ENV ADMIN_PASSWORD=
-ENV GAME_PASSWORD=
+ENV ServerName="Killing Floor 2 Server"
+ENV ShortName="KFServer"
+ENV WebsiteLink="http://killingfloor2.com/"
+ENV BannerLink="http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png"
+ENV ServerMOTD="Welcome to our server. \n \n Have fun and good luck!"
+ENV ClanMotto="This is the clan motto."
+ENV AdminPassword=
+ENV GamePassword=
+ENV bDisableTeamCollision=True
+
 COPY --chown=+x ./setup-kfgame.sh ./setup-kfgame.sh
 
 # Start Server

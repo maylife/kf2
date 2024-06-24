@@ -6,14 +6,15 @@ services:
     user: "steam:steam"
     build: .
     environment:
-      - SERVER_NAME=(Maylife Server)
-      - SHORT_NAME=Mays
-      - WEBSITE_LINK=https://github.com/maylife/kf2
-      - BANNER_LINK=http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png
-      - SERVER_MOTD=Welcome /n Welcome /n Welcome
-      - CLAN_MOTTO=Testing
-      - ADMIN_PASSWORD=changeme
-      - GAME_PASSWORD=
+      - ServerName=(Maylife Server)
+      - ShortName=Mays
+      - WebsiteLink=https://github.com/maylife/kf2
+      - BannerLink=http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png
+      - ServerMOTD=Welcome /n Welcome /n Welcome
+      - ClanMotto=Testing
+      - AdminPassword=changeme
+      - GamePassword=
+      - bDisableTeamCollision=True
     volumes:
       - KF2Logs:/home/steam/kf2/KFGame/Logs/
     ports:

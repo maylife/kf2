@@ -12,8 +12,8 @@ bDisableTeamCollision="$bDisableTeamCollision"
 
 CONFIG_FILE=./KFGame/Config/LinuxServer-KFGame.ini
 
-sed -i -e "s~^ServerName=.*~ServerName=$SERVER_NAME~g" "$CONFIG_FILE"
-sed -i -e "s~^ShortName=.*~ShortName=$SHORT_NAME~g" "$CONFIG_FILE"
+sed -i -e "s~^ServerName=.*~ServerName=$ServerName~g" "$CONFIG_FILE"
+sed -i -e "s~^ShortName=.*~ShortName=$ShortName~g" "$CONFIG_FILE"
 sed -i -e "s~^WebsiteLink=.*~WebsiteLink=$WebsiteLink~g" "$CONFIG_FILE"
 sed -i -e "s~^BannerLink=.*~BannerLink=$BannerLink~g" "$CONFIG_FILE"
 sed -i -e "s~^ServerMOTD=.*~ServerMOTD=$ServerMOTD~g" "$CONFIG_FILE"
